@@ -1,0 +1,34 @@
+function(xcode_lib_standard_setting target)
+
+    set_target_properties(${target} PROPERTIES XCODE_ATTRIBUTE_ENABLE_BITCODE "YES")
+    set_xcode_property_simple(${target} GCC_GENERATE_DEBUGGING_SYMBOLS YES)
+    set_xcode_property_simple(${target} IPHONEOS_DEPLOYMENT_TARGET "9.0")
+    set_xcode_property_simple(${target} GCC_OPTIMIZATION_LEVEL[variant=Release] s)
+    set_xcode_property_simple(${target} GCC_OPTIMIZATION_LEVEL[variant=RelWithDebInfo] 3)
+    set_target_properties(${target} PROPERTIES
+                      ARCHIVE_OUTPUT_DIRECTORY_DEBUG "/$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)"
+                      ARCHIVE_OUTPUT_DIRECTORY_RELEASE "/$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)")
+  
+endfunction()
+
+if(IOS)
+set(CMAKE_XCODE_ATTRIBUTE_GCC_GENERATE_DEBUGGING_SYMBOLS[variant=Debug] "YES")
+set(CMAKE_XCODE_ATTRIBUTE_GCC_GENERATE_DEBUGGING_SYMBOLS[variant=MinSizeRel] "NO")
+set(CMAKE_XCODE_ATTRIBUTE_GCC_GENERATE_DEBUGGING_SYMBOLS[variant=RelWithDebInfo] "YES")
+set(CMAKE_XCODE_ATTRIBUTE_GCC_GENERATE_DEBUGGING_SYMBOLS[variant=Release] "NO")
+
+set(CMAKE_XCODE_ATTRIBUTE_COPY_PHASE_STRIP[variant=Debug] "NO")
+set(CMAKE_XCODE_ATTRIBUTE_COPY_PHASE_STRIP[variant=MinSizeRel] "YES")
+set(CMAKE_XCODE_ATTRIBUTE_COPY_PHASE_STRIP[variant=RelWithDebInfo] "NO")
+set(CMAKE_XCODE_ATTRIBUTE_COPY_PHASE_STRIP[variant=Release] "YES")
+
+set(CMAKE_XCODE_ATTRIBUTE_GCC_OPTIMIZATION_LEVEL[variant=Debug] "0")
+set(CMAKE_XCODE_ATTRIBUTE_GCC_OPTIMIZATION_LEVEL[variant=MinSizeRel] "s")
+set(CMAKE_XCODE_ATTRIBUTE_GCC_OPTIMIZATION_LEVEL[variant=RelWithDebInfo] "3")
+set(CMAKE_XCODE_ATTRIBUTE_GCC_OPTIMIZATION_LEVEL[variant=Release] "3")
+
+set(CMAKE_XCODE_ATTRIBUTE_IPHONEOS_DEPLOYMENT_TARGET[variant=Debug] "9.0")
+set(CMAKE_XCODE_ATTRIBUTE_IPHONEOS_DEPLOYMENT_TARGET[variant=MinSizeRel] "9.0")
+set(CMAKE_XCODE_ATTRIBUTE_IPHONEOS_DEPLOYMENT_TARGET[variant=RelWithDebInfo] "9.0")
+set(CMAKE_XCODE_ATTRIBUTE_IPHONEOS_DEPLOYMENT_TARGET[variant=Release] "9.0")
+endif()
