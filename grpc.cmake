@@ -53,4 +53,6 @@ function(xln_protobuf_generate_grpc_cpp)
   
 endfunction()
 
-add_definitions(-D_WIN32_WINNT=0x600)
+if(MSVC)
+    add_definitions(-D_WIN32_WINNT=0x600)
+endif()
